@@ -14,10 +14,20 @@
 #include <stdio.h>
 #include <iostream>
 
+/*
+ 	Drugi przykład z laboratorium:
+		h = 473567883536982
+		g = 4
+		p = 1263154214185307
+
+	Trzeci przykład z laboratorium:
+		h = 262635754439740
+*/
+
 NTL_CLIENT
 
-const ZZ n = (ZZ) 1018;
-const ZZ N = n + 1;
+ZZ N = (ZZ) 23;
+ZZ n = (N - 1) / 2;
 
 void cycle_vals( ZZ &x, ZZ &a, ZZ &b, ZZ v1, ZZ v2 )
 {
@@ -41,7 +51,7 @@ void cycle_vals( ZZ &x, ZZ &a, ZZ &b, ZZ v1, ZZ v2 )
 	}
 }
 
-ZZ find_x( ZZ v1, ZZ v2 )
+void find_x( ZZ v1, ZZ v2 )
 {
 	ZZ x, a, b;
 	ZZ X, A, B;
@@ -61,24 +71,36 @@ ZZ find_x( ZZ v1, ZZ v2 )
 		// Skończ przebieg, gdy wystąpi kolizja
 		if( x == X )
 		{
+			ZZ r = (b - B) % n;
+			if( r == 0 )
+			{
+				cout << "Nie znaleziono rozwiazania!" << endl;
+			}
+			else
+			{
+				cout << "x = " << InvMod( r, n ) * (A - a) % n << endl;
+			}
 			break;
 		}
 	}
 
-	return (a - A) / (B - b);
 }
 
 int main()
 {
 	ZZ a, b, x;
 
-	cout << "Podaj a (generator):" << endl;
+	cout << "Podaj p (strong-prime): ";
+	cin >> N;
+	cout << "Podaj g (generator): ";
 	cin >> a;
-	cout << "Podaj b (element):" << endl;
+	cout << "Podaj h (element): ";
 	cin >> b;
 
-	x = find_x( a, b );
-	cout << x << endl;
+	n = (N - 1) / 2;
+	cout << "q = " << n << endl << endl;
+
+	find_x( a, b );
 
 	return 0;
 }
