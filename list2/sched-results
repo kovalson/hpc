@@ -1,0 +1,53 @@
+~/Pulpit/hpc/list2 $ ./sched 
+
+static scheduling
+Thread 0 has completed iteration 0
+Thread 0 has completed iteration 1
+Thread 0 has completed iteration 2
+Thread 1 has completed iteration 4
+Thread 0 has completed iteration 3
+Thread 2 has completed iteration 8
+Thread 1 has completed iteration 5
+Thread 3 has completed iteration 12
+Thread 1 has completed iteration 6
+Thread 2 has completed iteration 9
+Thread 1 has completed iteration 7
+Thread 3 has completed iteration 13
+Thread 2 has completed iteration 10
+Thread 2 has completed iteration 11
+Thread 3 has completed iteration 14
+Thread 3 has completed iteration 15
+All done! (~54 sec)
+
+dynamic scheduling
+Thread 0 has completed iteration 0
+Thread 1 has completed iteration 1
+Thread 2 has completed iteration 2
+Thread 3 has completed iteration 3
+Thread 0 has completed iteration 4
+Thread 1 has completed iteration 5
+Thread 2 has completed iteration 6
+Thread 3 has completed iteration 7
+Thread 0 has completed iteration 8
+Thread 1 has completed iteration 9
+Thread 2 has completed iteration 10
+Thread 3 has completed iteration 11
+Thread 0 has completed iteration 12
+Thread 1 has completed iteration 13
+Thread 2 has completed iteration 14
+Thread 3 has completed iteration 15
+All done! (~35 sec)
+
+~/Pulpit/hpc/list2 $
+
+--------------------------------------
+
+~/Pulpit/hpc/list2 $ ./sched
+
+static scheduling 2
+All done! (0.017468 sec)
+
+dynamic scheduling 2
+All done! (0.733678 sec)
+
+~/Pulpit/hpc/list2 $
