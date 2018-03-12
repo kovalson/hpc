@@ -1,0 +1,80 @@
+~/Pulpit/hpc/list2 $ g++ ./flo.cpp -o flo -lpthread -fopenmp
+~/Pulpit/hpc/list2 $ ./flo
+
+
+> private ---
+x = 13
+Thread number: 1:	3
+Thread number: 2:	6
+Thread number: 2:	7
+Thread number: 2:	8
+Thread number: 1:	4
+Thread number: 1:	5
+Thread number: 3:	9
+Thread number: 3:	10
+x inside = 0
+Thread number: 0:	0
+Thread number: 0:	1
+Thread number: 0:	2
+x = 13
+-------------
+
+> lastprivate ---
+x = 13
+Thread number: 1:	3
+Thread number: 1:	4
+Thread number: 1:	5
+Thread number: 2:	6
+Thread number: 2:	7
+Thread number: 2:	8
+Thread number: 3:	9
+Thread number: 3:	10
+x inside = 0
+Thread number: 0:	0
+Thread number: 0:	1
+Thread number: 0:	2
+x = 10
+-----------------
+
+> firstprivate ---
+x = 13
+Thread number: 3:	9
+Thread number: 3:	10
+Thread number: 1:	3
+Thread number: 1:	4
+Thread number: 1:	5
+Thread number: 2:	6
+Thread number: 2:	7
+Thread number: 2:	8
+x inside = 13
+Thread number: 0:	0
+Thread number: 0:	1
+Thread number: 0:	2
+x = 13
+------------------
+
+> ordered -----
+Thread 1 got val 1000003
+Thread 2 got val 1000006
+Thread 3 got val 1000008
+Thread 0 got val 1000000
+1 1000000
+Thread 0 got val 1000001
+2 1000001
+Thread 0 got val 1000002
+3 1000002
+4 1000003
+Thread 1 got val 1000004
+5 1000004
+Thread 1 got val 1000005
+6 1000005
+7 1000006
+Thread 2 got val 1000007
+8 1000007
+9 1000008
+Thread 3 got val 1000009
+10 1000009
+---------------
+
+~/Pulpit/hpc/list2 $
+
