@@ -190,15 +190,3 @@ ZZ kangaroo_x( ZZ p, ZZ q, ZZ g, ZZ h, ZZ a, ZZ b )
 	// Zwróć wyliczony logarytm
 	return x;
 }
-
-int main()
-{
-	ZZ p, q, g, h, a, b, x;
-	cout << "p q g h a b" << endl;
-	cin >> p >> q >> g >> h >> a >> b;
-	
-	x = kangaroo_x( p, q, g, h, a, b );
-	cout << x << endl;
-
-	return 0;
-}

@@ -1,1 +1,1 @@
-g++ -std=c++11 kangaroo.cpp -o kangaroo -lntl -fopenmp -lgmp -lm
+g++ -std=c++11 pohe.cpp -o pohe -lntl -fopenmp -lgmp -lm -O2

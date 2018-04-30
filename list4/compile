@@ -1,1 +1,1 @@
-g++ -std=c++11 kangaroo.cpp -o kangaroo -lntl -fopenmp
+g++ -std=c++11 kangaroo.cpp -o kangaroo -lntl -lgmp -lm -pthread -fopenmp -g

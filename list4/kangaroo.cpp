@@ -14,8 +14,9 @@
 #include <unordered_map>
 NTL_CLIENT;
 
-#define	NUM_THREADS		4
-#define BITS_NUM_MAX	45
+#define	NUM_THREADS		2
+#define BITS_NUM_MAX	40
+#define BITS_NUM_MIN	20
 #define	k				20
 #define	KANGAROO_TAME	0
 #define	KANGAROO_WILD	1
@@ -32,30 +33,18 @@ public:
 	ZZ start_offset;
 };
 
-// long k = 20;
-
-// Sprawdzanie, czy liczba jest "rozróżnialna" (distinguished)
+/**
+ * Sprawdzanie, czy podana liczba jest "rozróżnialna".
+ * W tym przypadku funkcja sprawdza, czy liczba bitów potrzebnych
+ * do zapisu podanej liczby mieści się w pewnym zdefiniowanym przedziale.
+ * 
+ * @param	[ZZ] num	Liczba do sprawdzenia
+ * @return	[bool] 		true jeśli się mieści, false w przeciwnym przypadku
+ */
 bool is_distinguished( ZZ num )
 {
-	// Sprawdź, czy liczba bitów potrzebnych
-	// do zapisu podanej wartości jest mniejsza niż
-	// pewna stała BITS_NUM
 	long num_bits = NumBits( num );
-	return num_bits < BITS_NUM_MAX;
-}
-
-bool is_distinguished2( ZZ num )
-{
-	// Sprawdź czy ostatnie LAST_BITS_NUM
-	// jest 1
-	long b = 0;
-	while( b < LAST_BITS_NUM )
-	{
-		if( bit( num, b ) != 1 )
-			return false;
-		b++;
-	}
-	return true;
+	return (num_bits > BITS_NUM_MIN && num_bits < BITS_NUM_MAX);
 }
 
 ZZ beta( ZZ a, ZZ b )
@@ -70,7 +59,6 @@ ZZ f( ZZ x )
 
 void find_x( ZZ p, ZZ g, ZZ h, ZZ a, ZZ b )
 {
-	// long N = conv<long>( (f( (ZZ) 0 ) + f( b )) / 2 * 2 );
 	bool found_flag = false;
 	int idx, tag;
 	ZZ v, pos, d, start, exponent;
@@ -93,15 +81,11 @@ void find_x( ZZ p, ZZ g, ZZ h, ZZ a, ZZ b )
 		if( tag == KANGAROO_TAME )
 		{
 			start = ((a + b) / 2) + (idx * v);
-
-			#pragma omp critical
 			pos = PowerMod( g, start, p );
 		}
 		else
 		{
 			start = (idx * v);
-
-			#pragma omp critical
 			pos = MulMod( h, PowerMod( g, start, p ), p );
 		}
 
@@ -112,11 +96,8 @@ void find_x( ZZ p, ZZ g, ZZ h, ZZ a, ZZ b )
 		while( true )
 		{
 			// Zwiększ dystans i wykonaj skok
-			#pragma omp critical
-			{
-				d += f( pos );
-				pos = MulMod( pos, PowerMod( g, f( pos ), p ), p );
-			}
+			d += f( pos );
+			pos = MulMod( pos, PowerMod( g, f( pos ), p ), p );
 
 			// Jeżeli znaleziono już rozwiązanie - przerwij
 			if( found_flag )
