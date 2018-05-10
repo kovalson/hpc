@@ -25,6 +25,7 @@ class InputData
 public:
 	ZZ p;
 	ZZ Q;
+	ZZ r;
 	vector <PrimesPair> factors;
 	ZZ g;
 	ZZ h;

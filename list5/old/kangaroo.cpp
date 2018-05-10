@@ -24,7 +24,7 @@
 #include "DPoint.cpp"
 NTL_CLIENT
 
-#define	NUM_THREADS		4	// Liczba dostępnych procesorów
+#define	NUM_THREADS		2	// Liczba dostępnych procesorów
 #define	K				20	// Liczba różnych skoków
 #define BITS_NUM_MIN	0	// Minimalna liczba bitów zapisu liczby rozróżnialnej
 #define BITS_NUM_MAX	50	// Maksymalna liczba bitów zapisu liczby rozróżnialnej

@@ -31,6 +31,9 @@ InputData parse_input()
 
 	cin >> input_data.p;
 	cin >> input_data.Q;
+	input_data.r = 0;
+	if( input_data.Q != 0 )
+		input_data.r = (input_data.p - 1) / input_data.Q;
 	cin >> factors;
 	
 	while( factors-- )
